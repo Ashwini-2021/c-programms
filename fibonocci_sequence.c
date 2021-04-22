@@ -1,25 +1,28 @@
-/*3.	Write a program to display first n Fibonacci numbers (1, 1, 2, 3, 5, 7, ….)*/
+/*7.	 Write a recursive function to calculate the nth Fibonacci number. Use this function in main to display the first n Fibonacci numbers.
+ The recursive definition of nth Fibonacci number is as follows:
+	fib(n) = 1	if n = 1 or 2
+	          = fib(n-2) + fib(n-1)	if n>2
+*/
 #include<stdio.h>
+int fib(int);
 int main()
 {
-    int number,i,no=1,temp,ino;
-    printf("How many terms of fibonacci sequence you want:");
-    scanf("%d",&number);
-    printf("\nfibonocci sequence upto %d terms are:\n",number);
-    for(i=0;i<=number;i++)
-    {
-      
-      printf("%d\t",no);//1,1,2,3
-      temp=no+ino;//temp=1,2,3
-      ino=no;//ino=no=1,1,2
-      no=temp;//no=1=temp=1,2,3
-      temp=ino;//temp=1=ino=1,1,2
-
-    }  
+    int no,num;
+    printf("How many terms of fibbonocci sequence you want::");
+    scanf("%d",&no);
+    printf("fibonocci ssequence of %d terms are::");
+    num=fib(no);
+    printf("%d\t",num);
     return 0;
 }
-/*OUTPUT
-How many terms of fibonacci sequence you want:10
+int fib(int n)
+{
+    if((n==1)||(n==2))
+    {
+      return 1;
+    }
+    else{
+        return fib(n-2)+fib(n-1);
+    }
 
-fibonocci sequence upto 10 terms are:
-1       1       2       3       5       8       13      21      34      55      89*/
+}
