@@ -1,40 +1,127 @@
-/*2.	Accept n integers in array A. Pass this array and two counter variables to a function which will set first counter to total number 
-of even values in array and the other to the total number of odd values. Display these counts in main.
-(Hint: Pass the addresses of the counters to the function)*/
+/*2.	Create a structure employee (id, name, salary). Accept details of n employees and write a menu driven program
+ to perform the following operations. Write separate functions for the different operations.
+a)	Search by name
+b)	Search by id
+c)	Display all
+d)	Display all employees having salary>2,00,000
+e)	Display employee having maximum salary.*/
 #include<stdio.h>
-void countnum(int a[50],int,int*,int*);
+#include<string.h>
+#include<stdlib.h>
+struct employee
+{
+    int id;
+    char name[100];
+    float salary;
+}emp[50];
+void Search_by_name(int n);
+void Search_by_id(int n);
+void Display_all(int n);
+void Display_emp_gre_salary(int n);
+void Display_emp_max_salary(int n);
 int main()
 {
-    int arr[50],n,i;
-    int even_count=0,odd_count=0;
-    printf("how many elements you want to store in array:");
+    int i,n,choice;
+    printf("how many numbers of employee detail you want to store::");
     scanf("%d",&n);
-    printf("enter elements:");
     for(i=0;i<n;i++)
     {
-        scanf("%d",&arr[i]);
+        printf("\nEnter employee id ::");
+        scanf("%d",&emp[i].id);
+        fflush(stdin);
+        printf("\nEmployee name::");
+        scanf("%s",emp[i].name);
+        printf("\nEnter salary:: ");
+        scanf("%f",&emp[i].salary);
     }
-    printf("elements in array are::");
-    for(i=0;i<n;i++)
+    printf("enter the number that operation you want to do \n1.Search by name \n2.Search by id  \n3.Display all \n 4.Display all employees having salary>2,00,000 \n5.Display employee having maximum salary.\n");
+    scanf("%d",&choice);
+    switch(choice)
     {
-        printf("%d\t",arr[i]);
+        case 1:Search_by_name(n);
+        break;
+        case 2:Search_by_id(n);
+        break;
+        case 3:Display_all(n);
+        break;
+        case 4:Display_emp_gre_salary(n);
+        break;
+        case 5:Display_emp_max_salary(n);
+        break;
+        default:printf("select correct option");
     }
-    countnum(arr,n,&even_count,&odd_count);
-    printf(" \n%d even numbers present in give array",even_count);
-    printf("\n%d odd numbers present in given array",odd_count);
     return 0;
-    }
-    void countnum(int a[50],int n,int *ecount,int *ocount)
+}
+void Search_by_name(int n)
+{
+    int i,c;
+    char name[100];
+    printf("Enter Employee name that you want to search::");
+    scanf("%s",name);
+    for(i=0;i<n;i++)
     {
-        int i;
-        for(i=0;i<n;i++)
+        c=strcmp(name,emp[i].name);
+        if(c==0)
         {
-            if(a[i]%2==0)
-            {
-                *ecount=*ecount+1;
-            }
-            else{
-                *ocount=*ocount+1;
-            }
+            printf("\nEmployee id :: %d",emp[i].id);
+            printf("\nEmployee name :: %s",emp[i].name);
+            printf("\nsalary :: %f",emp[i].salary);
         }
     }
+}
+void Search_by_id(int n)
+{
+    int i,id;
+    printf("\nEnter employee id that you want to search::");
+    scanf("%d",&id);
+    for(i=0;i<n;i++)
+    {
+        if(id==emp[i].id)
+        {
+            printf("\nEmployee id :: %d",emp[i].id);
+            printf("\nEmployee name :: %s",emp[i].name);
+            printf("\nsalary :: %f",emp[i].salary); 
+        }
+    }
+
+}
+void Display_all(int n)
+{
+    int i;
+    printf("%d employees details are::");
+    for(i=0;i<n;i++)
+    {
+            printf("\nEmployee id :: %d",emp[i].id);
+            printf("\nEmployee name :: %s",emp[i].name);
+            printf("\nsalary :: %f",emp[i].salary);   
+    }
+}
+void Display_emp_gre_salary(int n)
+{
+    int i;
+    printf("employee details having salary greater than 200000:");
+    for(i=0;i<n;i++)
+    {
+        if(emp[i].salary>200000)
+        {
+            printf("\nEmployee id :: %d",emp[i].id);
+            printf("\nEmployee name :: %s",emp[i].name);
+            printf("\nsalary :: %f",emp[i].salary);  
+        }
+    }
+}
+void Display_emp_max_salary(int n)
+{
+    int i,max=0;
+    printf("\ndetails of employee having max salary is");
+    for(i=0;i<n;i++)
+    {
+        if(emp[max].salary<emp[i].salary)
+        {
+            max=i;
+        }
+    }
+            printf("\nEmployee id :: %d",emp[max].id);
+            printf("\nEmployee name :: %s",emp[max].name);
+            printf("\nsalary :: %f",emp[max].salary);  
+}
